@@ -865,6 +865,28 @@
             element.addEventListener('input', calculate);
         });
     });
+
+
+async function saveToDatabase(calcData) {
+    try {
+        const response = await fetch('/api/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(calcData)
+        });
+
+        if (response.ok) {
+            console.log("Saved to MongoDB!");
+            alert("Calculation saved successfully!");
+        }
+    } catch (error) {
+        console.error("Error saving data:", error);
+    }
+}
+
+// Example: Call this function when your calculation is done
+// let myResult = { total: 500, date: new Date() };
+// saveToDatabase(myResult);
 </script>
 </body>
 </html>
