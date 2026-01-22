@@ -867,26 +867,22 @@
     });
 
 
-async function saveToDatabase(calcData) {
-    try {
-        const response = await fetch('/api/save', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(calcData)
-        });
-
-        if (response.ok) {
-            console.log("Saved to MongoDB!");
-            alert("Calculation saved successfully!");
-        }
-    } catch (error) {
-        console.error("Error saving data:", error);
-    }
+// To Save
+async function saveData(myObject) {
+    await fetch('/api/data', {
+        method: 'POST',
+        body: JSON.stringify(myObject),
+        headers: {'Content-Type': 'application/json'}
+    });
 }
 
-// Example: Call this function when your calculation is done
-// let myResult = { total: 500, date: new Date() };
-// saveToDatabase(myResult);
+// To Load (Run this on window.onload)
+async function loadData() {
+    const res = await fetch('/api/data');
+    const data = await res.json();
+    console.log("Here is your data from all devices:", data);
+    // Now use JS to display 'data' on your screen
+}
 </script>
 </body>
 </html>
